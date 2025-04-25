@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend for TimeTracker",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "keywords": [
+    "express",
+    "TimeTracker"
+  ],
+  "author": "Adrian",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
