@@ -1,4 +1,5 @@
 import "./App.css";
+import { Button } from "@/components/ui/button";
 
 import { useEffect, useState } from "react";
 function MyButton() {
@@ -20,10 +21,11 @@ function App() {
     }, []);
 
     return (
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col min-h-svh">
             <h1 className="text-4xl">Message from Backend:</h1>
             <p className="text-white">{message}</p>
             <MyButton />
+            <Button>This is a UI-Component</Button>
         </div>
     );
 }
