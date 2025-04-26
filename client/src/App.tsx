@@ -1,10 +1,9 @@
 import "./App.css";
 
 import { useEffect, useState } from "react";
-// TODO: Fix Tailwind CSS styles
 function MyButton() {
     return (
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <button className="bg-red-500 text-white hover:bg-sky-700 rounded ">
             Click Me!
         </button>
     );
@@ -21,9 +20,9 @@ function App() {
     }, []);
 
     return (
-        <div>
-            <h1>Message from Backend:</h1>
-            <p>{message}</p>
+        <div className="flex justify-center items-center flex-col">
+            <h1 className="text-4xl">Message from Backend:</h1>
+            <p className="text-white">{message}</p>
             <MyButton />
         </div>
     );
