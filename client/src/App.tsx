@@ -37,6 +37,7 @@ function App() {
                     <Button className="w-full">Start</Button>
                 </CardContent>
             </Card>
+            {/* Past TIme Entries */}
         </div>
     );
 }
