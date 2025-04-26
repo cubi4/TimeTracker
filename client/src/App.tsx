@@ -79,6 +79,22 @@ function App() {
                             <TableCell className="text-center">11:30</TableCell>
                             <TableCell className="text-center">1h</TableCell>
                         </TableRow>
+                        <TableRow>
+                            <TableCell className="text-center">
+                                Example Task
+                            </TableCell>
+                            <TableCell className="text-center">10:30</TableCell>
+                            <TableCell className="text-center">11:30</TableCell>
+                            <TableCell className="text-center">1h</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className="text-center">
+                                Example Task
+                            </TableCell>
+                            <TableCell className="text-center">10:30</TableCell>
+                            <TableCell className="text-center">11:30</TableCell>
+                            <TableCell className="text-center">1h</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </Card>
