@@ -1,10 +1,10 @@
 import "./App.css";
 
 import { useEffect, useState } from "react";
-
+// TODO: Fix Tailwind CSS styles
 function MyButton() {
     return (
-        <button style={{ backgroundColor: "blue", color: "white", padding: "0.5rem 1rem", border: "none", borderRadius: "4px", cursor: "pointer" }}>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
             Click Me!
         </button>
     );
