@@ -1,1 +1,9 @@
-[] 
+[
+    {
+        "id": 1,
+        "taskName": "Write Documentation",
+        "startTime": "2024-04-28T09:00:00",
+        "endTime": "2024-04-28T10:30:00",
+        "duration": "1h 30m"
+    }
+]

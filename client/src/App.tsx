@@ -13,20 +13,37 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
+interface TimeEntry {
+    id: number;
+    taskName: string;
+    startTime: string;
+    endTime: string;
+    duration: string;
+}
+
 function App() {
-    const [message, setMessage] = useState<string>("");
+    const [entries, setEntries] = useState<TimeEntry[]>([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/") // Call backend's Hello World route
-            .then((response) => response.text())
-            .then((data) => setMessage(data))
-            .catch((error) => console.error("Error fetching message:", error));
+        fetch("http://localhost:3000/entries") // Call backend's entries route
+            .then((response) => response.json())
+            .then((data) => setEntries(data))
+            .catch((error) => console.error("Error fetching entries:", error));
     }, []);
 
     return (
         <div className="flex justify-center items-center flex-col min-h-svh">
-            <h1 className="text-4xl">Message from Backend:</h1>
-            <p className="text-purple">{message}</p>
+            <h1 className="text-4xl">Entries from Backend:</h1>
+
+            {/* output (Testing) */}
+            <ul className="mb-6">
+                {entries.map((entry) => (
+                    <li key={entry.id}>
+                        {entry.taskName} - {entry.startTime} to {entry.endTime}{" "}
+                        ({entry.duration})
+                    </li>
+                ))}
+            </ul>
 
             {/* Timer Card */}
             <Card className="w-full max-w-2xl shadow-md">
