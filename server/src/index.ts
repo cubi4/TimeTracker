@@ -29,6 +29,10 @@ interface TimeEntry {
 //define path to the JSON file
 const dataFilePath = path.join(__dirname, "entries.json");
 
+//Functions
+
+
+
 //GET
 app.get("/entries", (req, res) => {
     if (!fs.existsSync(dataFilePath)) {
@@ -43,7 +47,7 @@ app.post("/entries", (req, res) => {
     const { id, taskName, startTime, endTime, duration } = req.body;
 
     const newEntry: TimeEntry = {
-        id: id || Date.now(),
+        id: id || Date.now(), // Use current timestamp as ID if not provided
         taskName,
         startTime,
         endTime,

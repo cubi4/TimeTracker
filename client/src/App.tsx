@@ -40,21 +40,15 @@ function App() {
     //Timer Variables
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const [isPaused, setIsPaused] = useState<boolean>(false);
+
+
+
+
+
 
     return (
         <div className="flex justify-center items-center flex-col min-h-svh">
-            <h1 className="text-4xl">Entries from Backend:</h1>
-
-            {/* output (Testing) */}
-            <ul className="mb-6">
-                {entries.map((entry) => (
-                    <li key={entry.id}>
-                        {entry.taskName} - {entry.startTime} to {entry.endTime}{" "}
-                        ({entry.duration})
-                    </li>
-                ))}
-            </ul>
-
             {/* Timer Card */}
             <Card className="w-full max-w-2xl shadow-md">
                 <CardHeader>
@@ -67,96 +61,129 @@ function App() {
                     {/* Task Name Eingabefeld */}
                     <Input
                         placeholder="Task Name"
+                        disabled={timerRunning}
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
                     />
                     {/* Timer Anzeige */}
                     <div className="text-4xl text-center">
-                        {timerRunning
+                        {timerRunning || isPaused
                             ? new Date(elapsedTime * 1000)
                                   .toISOString()
                                   .slice(11, 19)
                             : "00:00:00"}
                         {/* Start Button */}
-                        <Button
-                            className="w-full"
-                            disabled={!taskName || timerRunning}
-                            onClick={() => {
-                                if (!timerRunning && taskName) {
-                                    setStartTime(new Date());
-                                    setTimerRunning(true);
-
-                                    timerRef.current = setInterval(() => {
-                                        setElapsedTime((prev) => prev + 1);
-                                    }, 1000);
-                                }
-                            }}
-                        >
-                            {timerRunning ? "Running..." : "Start"}
-                        </Button>
-                    </div>
-                    {/* Stop Button */}
-                    {timerRunning && (
-                        <Button
-                            className="w-full bg-red-500 hover:bg-red-600"
-                            onClick={() => {
-                                if (timerRunning) {
-                                    if (timerRef.current) {
-                                        clearInterval(timerRef.current);
-                                    }
-                                    setTimerRunning(false);
-                                }
-                                const endTime = new Date();
-                                const duration = Math.floor(
-                                    (endTime.getTime() -
-                                        (startTime?.getTime() || 0)) /
-                                        1000
-                                );
-
-                                const newEntry: TimeEntry = {
-                                    id: Date.now(),
-                                    taskName,
-                                    startTime: startTime!.toISOString(),
-                                    endTime: endTime.toISOString(),
-                                    duration: `${Math.floor(
-                                        duration / 3600
-                                    )}h ${Math.floor(
-                                        (duration % 3600) / 60
-                                    )}m ${duration % 60}s`,
-                                };
-                                // POST the new entry to the backend
-                                fetch("http://localhost:3000/entries", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify(newEntry),
-                                })
-                                    .then((response) => {
-                                        if (!response.ok)
-                                            throw new Error(
-                                                "Failed to save entry"
-                                            );
-                                        return response;
-                                    })
-                                    .then((response) => response.json())
-                                    .then((data) => {
-                                        setEntries((prev) => [...prev, data]);
-                                        setTaskName("");
+                        {!timerRunning && (
+                            <Button
+                                className="w-full bg-green-500 hover:bg-green-600"
+                                disabled={!taskName}
+                                onClick={() => {
+                                    if (
+                                        !timerRunning &&
+                                        taskName &&
+                                        !isPaused
+                                    ) {
+                                        setStartTime(new Date());
+                                        setTimerRunning(true);
                                         setElapsedTime(0);
-                                        setStartTime(null);
+
+                                        timerRef.current = setInterval(() => {
+                                            setElapsedTime((prev) => prev + 1);
+                                        }, 1000);
+                                    }
+                                    if (isPaused) {
+                                        setIsPaused(false);
+                                        timerRef.current = setInterval(() => {
+                                            setElapsedTime((prev) => prev + 1);
+                                        }, 1000);
+                                        setTimerRunning(true);
+                                    }
+                                }}
+                            >
+                                {isPaused ? "Resume" : "Start"}
+                            </Button>
+                        )}
+                        {/* Pause Button */}
+                        {timerRunning && !isPaused && (
+                            <Button
+                                className="w-full bg-yellow-500 hover:bg-yellow-600"
+                                onClick={() => {
+                                    if (timerRunning) {
+                                        if (timerRef.current) {
+                                            clearInterval(timerRef.current);
+                                        }
+                                        setTimerRunning(false);
+                                        setIsPaused(true);
+                                    }
+                                }}
+                            >
+                                Pause
+                            </Button>
+                        )}
+
+                        {/* Stop Button */}
+                        {(timerRunning || isPaused) && (
+                            <Button
+                                className="w-full bg-red-500 hover:bg-red-600"
+                                onClick={() => {
+                                    if (timerRunning) {
+                                        if (timerRef.current) {
+                                            clearInterval(timerRef.current);
+                                        }
+                                        setTimerRunning(false);
+                                        setIsPaused(false);
+                                    }
+                                    const endTime = new Date();
+                                    const duration = elapsedTime;
+
+                                    const newEntry: TimeEntry = {
+                                        id: Date.now(),
+                                        taskName,
+                                        startTime: startTime!.toISOString(),
+                                        endTime: endTime.toISOString(),
+                                        duration: `${Math.floor(
+                                            duration / 3600
+                                        )}h ${Math.floor(
+                                            (duration % 3600) / 60
+                                        )}m ${duration % 60}s`,
+                                    };
+                                    // POST the new entry to the backend
+                                    fetch("http://localhost:3000/entries", {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify(newEntry),
                                     })
-                                    .catch((error) =>
-                                        console.error(
-                                            "Error posting entry:",
-                                            error
-                                        )
-                                    );
-                            }}
-                        >
-                            Stop
-                        </Button>
-                    )}
+                                        .then((response) => {
+                                            if (!response.ok)
+                                                throw new Error(
+                                                    "Failed to save entry"
+                                                );
+                                            return response;
+                                        })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            setEntries((prev) => [
+                                                ...prev,
+                                                data,
+                                            ]);
+                                            setTaskName("");
+                                            setElapsedTime(0);
+                                            setStartTime(null);
+                                        })
+                                        .catch((error) =>
+                                            console.error(
+                                                "Error posting entry:",
+                                                error
+                                            )
+                                        );
+                                }}
+                            >
+                                Stop
+                            </Button>
+                        )}
+                    </div>
                 </CardContent>
             </Card>
             {/* Past TIme Entries */}
@@ -185,30 +212,26 @@ function App() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        <TableRow>
-                            <TableCell className="text-center">
-                                Example Task
-                            </TableCell>
-                            <TableCell className="text-center">10:30</TableCell>
-                            <TableCell className="text-center">11:30</TableCell>
-                            <TableCell className="text-center">1h</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="text-center">
-                                Example Task
-                            </TableCell>
-                            <TableCell className="text-center">10:30</TableCell>
-                            <TableCell className="text-center">11:30</TableCell>
-                            <TableCell className="text-center">1h</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className="text-center">
-                                Example Task
-                            </TableCell>
-                            <TableCell className="text-center">10:30</TableCell>
-                            <TableCell className="text-center">11:30</TableCell>
-                            <TableCell className="text-center">1h</TableCell>
-                        </TableRow>
+                        {entries.map((entry) => (
+                            <TableRow key={entry.id}>
+                                <TableCell className="text-center">
+                                    {entry.taskName}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                    {new Date(entry.startTime)
+                                        .toLocaleString()
+                                        .slice(11, 16)}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                    {new Date(entry.endTime)
+                                        .toLocaleString()
+                                        .slice(11, 16)}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                    {entry.duration}
+                                </TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </Card>
