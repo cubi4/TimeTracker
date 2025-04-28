@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,7 @@ interface TimeEntry {
 }
 
 function App() {
+    // connection to backend
     const [entries, setEntries] = useState<TimeEntry[]>([]);
 
     useEffect(() => {
@@ -30,6 +31,15 @@ function App() {
             .then((data) => setEntries(data))
             .catch((error) => console.error("Error fetching entries:", error));
     }, []);
+
+    // define state variables
+    const [taskName, setTaskName] = useState<string>("");
+    const [startTime, setStartTime] = useState<Date | null>(null);
+
+    const [timerRunning, setTimerRunning] = useState<boolean>(false);
+    //Timer Variables
+    const [elapsedTime, setElapsedTime] = useState<number>(0);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
 
     return (
         <div className="flex justify-center items-center flex-col min-h-svh">
@@ -55,11 +65,52 @@ function App() {
 
                 <CardContent className="flex flex-col gap-6">
                     {/* Task Name Eingabefeld */}
-                    <Input placeholder="Task Name" />
+                    <Input
+                        placeholder="Task Name"
+                        value={taskName}
+                        onChange={(e) => setTaskName(e.target.value)}
+                    />
                     {/* Timer Anzeige */}
-                    <div className="text-4xl font-bold text-center">00:00</div>
-                    {/* Start Button */}
-                    <Button className="w-full">Start</Button>
+                    <div className="text-4xl text-center">
+                        {timerRunning
+                            ? new Date(elapsedTime * 1000)
+                                  .toISOString()
+                                  .slice(11, 19)
+                            : "00:00:00"}
+                        {/* Start Button */}
+                        <Button
+                            className="w-full"
+                            disabled={!taskName || timerRunning}
+                            onClick={() => {
+                                if (!timerRunning && taskName) {
+                                    setStartTime(new Date());
+                                    setTimerRunning(true);
+
+                                    timerRef.current = setInterval(() => {
+                                        setElapsedTime((prev) => prev + 1);
+                                    }, 1000);
+                                }
+                            }}
+                        >
+                            {timerRunning ? "Running..." : "Start"}
+                        </Button>
+                    </div>
+                    {/* Stop Button */}
+                    {timerRunning && (
+                        <Button
+                            className="w-full bg-red-500 hover:bg-red-600"
+                            onClick={() => {
+                                if (timerRunning) {
+                                    if (timerRef.current) {
+                                        clearInterval(timerRef.current);
+                                    }
+                                    setTimerRunning(false);
+                                }
+                            }}
+                        >
+                            Stop
+                        </Button>
+                    )}
                 </CardContent>
             </Card>
             {/* Past TIme Entries */}
