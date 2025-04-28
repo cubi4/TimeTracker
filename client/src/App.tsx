@@ -106,6 +106,52 @@ function App() {
                                     }
                                     setTimerRunning(false);
                                 }
+                                const endTime = new Date();
+                                const duration = Math.floor(
+                                    (endTime.getTime() -
+                                        (startTime?.getTime() || 0)) /
+                                        1000
+                                );
+
+                                const newEntry: TimeEntry = {
+                                    id: Date.now(),
+                                    taskName,
+                                    startTime: startTime!.toISOString(),
+                                    endTime: endTime.toISOString(),
+                                    duration: `${Math.floor(
+                                        duration / 3600
+                                    )}h ${Math.floor(
+                                        (duration % 3600) / 60
+                                    )}m ${duration % 60}s`,
+                                };
+                                // POST the new entry to the backend
+                                fetch("http://localhost:3000/entries", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify(newEntry),
+                                })
+                                    .then((response) => {
+                                        if (!response.ok)
+                                            throw new Error(
+                                                "Failed to save entry"
+                                            );
+                                        return response;
+                                    })
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                        setEntries((prev) => [...prev, data]);
+                                        setTaskName("");
+                                        setElapsedTime(0);
+                                        setStartTime(null);
+                                    })
+                                    .catch((error) =>
+                                        console.error(
+                                            "Error posting entry:",
+                                            error
+                                        )
+                                    );
                             }}
                         >
                             Stop

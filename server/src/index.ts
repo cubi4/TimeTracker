@@ -40,10 +40,10 @@ app.get("/entries", (req, res) => {
 
 //POST
 app.post("/entries", (req, res) => {
-    const { taskName, startTime, endTime, duration } = req.body;
+    const { id, taskName, startTime, endTime, duration } = req.body;
 
     const newEntry: TimeEntry = {
-        id: Date.now(),
+        id: id || Date.now(),
         taskName,
         startTime,
         endTime,
