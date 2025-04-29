@@ -47,10 +47,41 @@ function App() {
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [isPaused, setIsPaused] = useState<boolean>(false);
 
+
+    //functions
+    function groupEntriesByDate(entries: TimeEntry[]) {
+        const groups: Record<string, TimeEntry[]> = {};
+
+        for (const entry of entries) {
+            const date = new Date(entry.startTime).toLocaleDateString("de-DE");
+
+            if (!groups[date]) {
+                groups[date] = [];
+            }
+
+            groups[date].push(entry);
+        }
+
+        return groups;
+    }
+
+    function getSortedGroupedEntries(entries: TimeEntry[]) {
+        const grouped = groupEntriesByDate(entries);
+
+        const sorted = Object.entries(grouped).sort(([dateA], [dateB]) => {
+            const a = new Date(dateA.split(".").reverse().join("-")).getTime();
+            const b = new Date(dateB.split(".").reverse().join("-")).getTime();
+            return b - a; // neueste zuerst
+        });
+
+        return sorted;
+    }
+
+    const groupedEntries = getSortedGroupedEntries(entries);
     return (
         <div className="flex justify-center items-center flex-col min-h-svh">
             {/* Timer Card */}
-            <Card className="w-full max-w-2xl shadow-md">
+            <Card className="w-full max-w-xl shadow-md">
                 <CardHeader>
                     <CardTitle className="text-2xl flex items-center gap-2">
                         Task Name
@@ -66,7 +97,10 @@ function App() {
                         onChange={(e) => setTaskName(e.target.value)}
                     />
                     {/* TIMER DISPLAY */}
-                    <div className="text-4xl text-center">
+                    <div
+                        className="text-5xl text-center bg-blue-100 text-blue-700
+ p-6 rounded-lg shadow-inner font-mono tracking-widest"
+                    >
                         {timerRunning || isPaused
                             ? new Date(elapsedTime * 1000)
                                   .toISOString()
@@ -196,54 +230,63 @@ function App() {
                 </CardContent>
             </Card>
             {/* Past TIme Entries */}
-            <Card className="w-full max-w-2xl shadow-md mt-6">
-                <CardHeader>
-                    <CardTitle className="text-2xl flex items-center gap-2">
-                        Past Time Entries
-                    </CardTitle>
-                </CardHeader>
+            Past Time Entries
+            {groupedEntries.map(([date, dayEntries]) => (
+                <Card key={date} className="w-full max-w-xl shadow-md mt-6">
+                    <CardHeader>
+                        <CardTitle className="text-2xl flex items-center gap-2">
+                            {date}
+                        </CardTitle>
+                    </CardHeader>
 
-                <Table>
-                    <TableHeader className="bg-purple-500">
-                        <TableRow>
-                            <TableHead className="text-center font-bold">
-                                Task Name
-                            </TableHead>
-                            <TableHead className="text-center font-bold">
-                                Start Time
-                            </TableHead>
-                            <TableHead className="text-center font-bold">
-                                End Time
-                            </TableHead>
-                            <TableHead className="text-center font-bold">
-                                Duration
-                            </TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {entries.map((entry) => (
-                            <TableRow key={entry.id}>
-                                <TableCell className="text-center">
-                                    {entry.taskName}
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    {new Date(entry.startTime)
-                                        .toLocaleString()
-                                        .slice(11, 16)}
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    {new Date(entry.endTime)
-                                        .toLocaleString()
-                                        .slice(11, 16)}
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    {entry.duration}
-                                </TableCell>
+                    <Table>
+                        <TableHeader className="bg-purple-500">
+                            <TableRow>
+                                <TableHead className="text-center font-bold">
+                                    Task Name
+                                </TableHead>
+                                <TableHead className="text-center font-bold">
+                                    Start Time
+                                </TableHead>
+                                <TableHead className="text-center font-bold">
+                                    End Time
+                                </TableHead>
+                                <TableHead className="text-center font-bold">
+                                    Duration
+                                </TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Card>
+                        </TableHeader>
+                        <TableBody>
+                            {dayEntries.map((entry) => (
+                                <TableRow key={entry.id}>
+                                    <TableCell className="text-center">
+                                        {entry.taskName}
+                                    </TableCell>
+                                    <TableCell className="text-center">
+                                        {new Date(
+                                            entry.startTime
+                                        ).toLocaleTimeString("de-DE", {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </TableCell>
+                                    <TableCell className="text-center">
+                                        {new Date(
+                                            entry.endTime
+                                        ).toLocaleTimeString("de-DE", {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </TableCell>
+                                    <TableCell className="text-center">
+                                        {entry.duration}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Card>
+            ))}
         </div>
     );
 }
