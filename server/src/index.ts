@@ -9,7 +9,6 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
 const app = express();
 const port = 3000;
 
@@ -30,8 +29,18 @@ interface TimeEntry {
 const dataFilePath = path.join(__dirname, "entries.json");
 
 //Functions
+function formatDuration(seconds: number): string {
+    // returns Duration in a hh:mm format
+    const effectiveSeconds = Math.max(seconds, 60); // round to at least 1 minute
+    const totalMinutes = Math.floor(effectiveSeconds / 60);
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
 
-
+    return `${String(hours).padStart(1, "0")}:${String(minutes).padStart(
+        2,
+        "0"
+    )}`;
+}
 
 //GET
 app.get("/entries", (req, res) => {
@@ -51,7 +60,7 @@ app.post("/entries", (req, res) => {
         taskName,
         startTime,
         endTime,
-        duration,
+        duration: formatDuration(duration),
     };
 
     if (!fs.existsSync(dataFilePath)) {

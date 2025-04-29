@@ -18,7 +18,7 @@ interface TimeEntry {
     taskName: string;
     startTime: string;
     endTime: string;
-    duration: string;
+    duration: number;
 }
 
 function App() {
@@ -134,18 +134,12 @@ function App() {
                                         setIsPaused(false);
                                     }
                                     const endTime = new Date();
-                                    const duration = elapsedTime;
-
                                     const newEntry: TimeEntry = {
                                         id: Date.now(),
                                         taskName,
                                         startTime: startTime!.toISOString(),
                                         endTime: endTime.toISOString(),
-                                        duration: `${Math.floor(
-                                            duration / 3600
-                                        )}h ${Math.floor(
-                                            (duration % 3600) / 60
-                                        )}m ${duration % 60}s`,
+                                        duration: elapsedTime,
                                     };
                                     // POST the new entry to the backend
                                     fetch("http://localhost:3000/entries", {
@@ -165,12 +159,14 @@ function App() {
                                         .then((response) => response.json())
                                         .then((data) => {
                                             setEntries((prev) => [
-                                                ...prev,
                                                 data,
+                                                ...prev,
                                             ]);
                                             setTaskName("");
                                             setElapsedTime(0);
                                             setStartTime(null);
+                                            setIsPaused(false);
+                                            setTimerRunning(false);
                                         })
                                         .catch((error) =>
                                             console.error(
