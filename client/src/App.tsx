@@ -29,7 +29,12 @@ function App() {
         fetch("http://localhost:3000/entries") // Call backend's entries route
             .then((response) => response.json())
             .then((data) => setEntries(data))
-            .catch((error) => console.error("Error fetching entries:", error));
+            .catch((error) => {
+                console.error("Error fetching entries:", error);
+                alert(
+                    "Error fetching entries. Please check the backend server."
+                );
+            });
     }, []);
 
     // define state variables
@@ -42,11 +47,6 @@ function App() {
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [isPaused, setIsPaused] = useState<boolean>(false);
 
-
-
-
-
-
     return (
         <div className="flex justify-center items-center flex-col min-h-svh">
             {/* Timer Card */}
@@ -58,24 +58,26 @@ function App() {
                 </CardHeader>
 
                 <CardContent className="flex flex-col gap-6">
-                    {/* Task Name Eingabefeld */}
+                    {/* TASKNAME INPUT */}
                     <Input
                         placeholder="Task Name"
                         disabled={timerRunning}
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
                     />
-                    {/* Timer Anzeige */}
+                    {/* TIMER DISPLAY */}
                     <div className="text-4xl text-center">
                         {timerRunning || isPaused
                             ? new Date(elapsedTime * 1000)
                                   .toISOString()
                                   .slice(11, 19)
                             : "00:00:00"}
-                        {/* Start Button */}
-                        {!timerRunning && (
+                    </div>
+                    <div className="flex justify-between w-full space-x-4">
+                        {/* START BUTTON */}
+                        {!timerRunning && !isPaused && (
                             <Button
-                                className="w-full bg-green-500 hover:bg-green-600"
+                                className="flex-1 bg-green-500 hover:bg-green-600"
                                 disabled={!taskName}
                                 onClick={() => {
                                     if (
@@ -91,22 +93,30 @@ function App() {
                                             setElapsedTime((prev) => prev + 1);
                                         }, 1000);
                                     }
-                                    if (isPaused) {
-                                        setIsPaused(false);
-                                        timerRef.current = setInterval(() => {
-                                            setElapsedTime((prev) => prev + 1);
-                                        }, 1000);
-                                        setTimerRunning(true);
-                                    }
                                 }}
                             >
                                 {isPaused ? "Resume" : "Start"}
                             </Button>
                         )}
-                        {/* Pause Button */}
+                        {/* RESUME BUTTON */}
+                        {isPaused && (
+                            <Button
+                                className="flex-1 bg-green-500 hover:bg-green-600"
+                                onClick={() => {
+                                    setIsPaused(false);
+                                    timerRef.current = setInterval(() => {
+                                        setElapsedTime((prev) => prev + 1);
+                                    }, 1000);
+                                    setTimerRunning(true);
+                                }}
+                            >
+                                Resume
+                            </Button>
+                        )}
+                        {/* PAUSE BUTTON */}
                         {timerRunning && !isPaused && (
                             <Button
-                                className="w-full bg-yellow-500 hover:bg-yellow-600"
+                                className="flex-1 bg-yellow-500 hover:bg-yellow-600"
                                 onClick={() => {
                                     if (timerRunning) {
                                         if (timerRef.current) {
@@ -121,10 +131,10 @@ function App() {
                             </Button>
                         )}
 
-                        {/* Stop Button */}
+                        {/* STOP BUTTON */}
                         {(timerRunning || isPaused) && (
                             <Button
-                                className="w-full bg-red-500 hover:bg-red-600"
+                                className="flex-1 bg-red-500 hover:bg-red-600"
                                 onClick={() => {
                                     if (timerRunning) {
                                         if (timerRef.current) {
@@ -168,12 +178,15 @@ function App() {
                                             setIsPaused(false);
                                             setTimerRunning(false);
                                         })
-                                        .catch((error) =>
+                                        .catch((error) => {
                                             console.error(
                                                 "Error posting entry:",
                                                 error
-                                            )
-                                        );
+                                            );
+                                            alert(
+                                                "Error posting entry. Please check the backend server."
+                                            );
+                                        });
                                 }}
                             >
                                 Stop
