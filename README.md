@@ -17,7 +17,7 @@ Ein einfaches Web-basiertes Zeit-Tracking-Tool, mit dem du Aufgaben starten, pau
 ## Projektstruktur
 
 ```
-project-root/
+TimeTracker/
 ├── client/          # Frontend (React + TypeScript + TailwindCSS)
 └── server/          # Backend (Node.js + Express)
 ```
