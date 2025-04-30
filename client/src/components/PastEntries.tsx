@@ -15,7 +15,7 @@ interface TimeEntry {
         taskName: string;
         startTime: string;
         endTime: string;
-        duration: string | number;
+        duration: string;
 }
 
 interface PastEntriesProps {
@@ -65,7 +65,7 @@ export function PastEntries(props: PastEntriesProps) {
                             <Table className="w-full table-fixed">
                                 <TableHeader className="bg-emerald-600">
                                     <TableRow className="hover:bg-transparent cursor-default">
-                                        <TableHead className="text-center text-white font-bold w-2/5">
+                                        <TableHead className="text-left text-white font-bold w-2/5">
                                             Task Name
                                         </TableHead>
                                         <TableHead className="text-center text-white font-bold w-1/5 whitespace-normal">
@@ -85,7 +85,10 @@ export function PastEntries(props: PastEntriesProps) {
                                             key={entry.id}
                                             className="hover:bg-emerald-200 cursor-default"
                                         >
-                                            <TableCell className="text-center truncate">
+                                            <TableCell
+                                                className="text-left truncate"
+                                                title={entry.taskName}
+                                            >
                                                 {entry.taskName}
                                             </TableCell>
                                             <TableCell className="text-center text-emerald-600">
@@ -121,7 +124,7 @@ export function PastEntries(props: PastEntriesProps) {
                                             {sumDurations(
                                                 dayEntries.map(
                                                     (entry) =>
-                                                        entry.duration as string
+                                                        entry.duration
                                                 )
                                             )}
                                             h

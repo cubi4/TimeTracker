@@ -8,7 +8,7 @@ interface TimeEntry {
     taskName: string;
     startTime: string;
     endTime: string;
-    duration: number;
+    duration: string;
 }
 
 function App() {
@@ -81,6 +81,14 @@ function App() {
         return sorted;
     }
 
+    function formatDuration(seconds: number): string {
+        const totalMinutes = Math.floor(seconds / 60);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return `${hours}:${String(minutes).padStart(2, "0")}`;
+    }
+
+
     // Button handlers
     function handleStart() {
         setStartTime(new Date());
@@ -118,7 +126,7 @@ function App() {
             taskName,
             startTime: startTime ? startTime.toISOString() : "",
             endTime: endTime.toISOString(),
-            duration: elapsedTime,
+            duration: formatDuration(elapsedTime),
         };
 
         fetch("http://localhost:3000/entries", {

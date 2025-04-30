@@ -28,20 +28,6 @@ interface TimeEntry {
 //define path to the JSON file
 const dataFilePath = path.join(__dirname, "entries.json");
 
-//Functions
-function formatDuration(seconds: number): string {
-    // returns Duration in a hh:mm format
-    const effectiveSeconds = Math.max(seconds, 60); // round to at least 1 minute
-    const totalMinutes = Math.floor(effectiveSeconds / 60);
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-
-    return `${String(hours).padStart(1, "0")}:${String(minutes).padStart(
-        2,
-        "0"
-    )}`;
-}
-
 //GET
 app.get("/entries", (req, res) => {
     if (!fs.existsSync(dataFilePath)) {
@@ -60,7 +46,7 @@ app.post("/entries", (req, res) => {
         taskName,
         startTime,
         endTime,
-        duration: formatDuration(duration),
+        duration: duration,
     };
 
     if (!fs.existsSync(dataFilePath)) {
