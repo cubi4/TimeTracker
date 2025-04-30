@@ -83,3 +83,7 @@ Speichert einen neuen Zeiteintrag.
 }
 ```
 
+## Sonstiges
+
+- Timer kabb erst nach Eingabe eines Tasknamens gestartet werden
+- Die Duration rundet jede angefangene Minute auf

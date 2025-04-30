@@ -82,12 +82,12 @@ function App() {
     }
 
     function formatDuration(seconds: number): string {
-        const totalMinutes = Math.floor(seconds / 60);
+        const effectiveSeconds = Math.max(seconds, 1); // avoid 0 seconds
+        const totalMinutes = Math.ceil(effectiveSeconds / 60); // round up to the next minute
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
         return `${hours}:${String(minutes).padStart(2, "0")}`;
     }
-
 
     // Button handlers
     function handleStart() {
