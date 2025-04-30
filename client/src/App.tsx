@@ -27,7 +27,8 @@ function App() {
             });
     }, []);
 
-    // define state variables
+    // VARIABLES
+    //Task Variables
     const [taskName, setTaskName] = useState<string>("");
     const [startTime, setStartTime] = useState<Date | null>(null);
 
@@ -36,8 +37,14 @@ function App() {
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [isPaused, setIsPaused] = useState<boolean>(false);
+    const taskNameSuggestions = getUniqueTaskNames(entries);
 
-    //functions
+    // FUNCTIONS
+    function getUniqueTaskNames(entries: TimeEntry[]): string[] {
+        const names = entries.map((e) => e.taskName);
+        return Array.from(new Set(names));
+    }
+
     function groupEntriesByDate(entries: TimeEntry[]) {
         const groups: Record<string, TimeEntry[]> = {};
 
@@ -65,16 +72,11 @@ function App() {
             );
         }
         //sort the groups by date in descending order
-        const sorted = Object.entries(grouped)
-            .sort(([dateA], [dateB]) => {
-                const a = new Date(
-                    dateA.split(".").reverse().join("-")
-                ).getTime();
-                const b = new Date(
-                    dateB.split(".").reverse().join("-")
-                ).getTime();
-                return b - a; // latest first
-            });
+        const sorted = Object.entries(grouped).sort(([dateA], [dateB]) => {
+            const a = new Date(dateA.split(".").reverse().join("-")).getTime();
+            const b = new Date(dateB.split(".").reverse().join("-")).getTime();
+            return b - a; // latest first
+        });
 
         return sorted;
     }
@@ -155,6 +157,7 @@ function App() {
                         onPause={handlePause}
                         onResume={handleResume}
                         onStop={handleStop}
+                        taskNameSuggestions={taskNameSuggestions}
                     />
                     <PastEntries groupedEntries={groupedEntries} />
                 </div>
