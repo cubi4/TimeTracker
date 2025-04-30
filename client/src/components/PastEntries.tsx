@@ -62,19 +62,19 @@ export function PastEntries(props: PastEntriesProps) {
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="p-0">
-                            <Table>
+                            <Table className="w-full table-fixed">
                                 <TableHeader className="bg-emerald-600">
                                     <TableRow className="hover:bg-transparent cursor-default">
-                                        <TableHead className="text-center text-white font-bold min-w-[50%]">
+                                        <TableHead className="text-center text-white font-bold w-2/5">
                                             Task Name
                                         </TableHead>
-                                        <TableHead className="text-center text-white font-bold">
+                                        <TableHead className="text-center text-white font-bold w-1/5 whitespace-normal">
                                             Start Time
                                         </TableHead>
-                                        <TableHead className="text-center text-white font-bold">
+                                        <TableHead className="text-center text-white font-bold w-1/5 whitespace-normal">
                                             End Time
                                         </TableHead>
-                                        <TableHead className="text-center text-white font-bold">
+                                        <TableHead className="text-center text-white font-bold w-1/5 whitespace-normal">
                                             Duration
                                         </TableHead>
                                     </TableRow>
@@ -85,7 +85,7 @@ export function PastEntries(props: PastEntriesProps) {
                                             key={entry.id}
                                             className="hover:bg-emerald-200 cursor-default"
                                         >
-                                            <TableCell className="text-center">
+                                            <TableCell className="text-center truncate">
                                                 {entry.taskName}
                                             </TableCell>
                                             <TableCell className="text-center text-emerald-600">
