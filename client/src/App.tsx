@@ -80,7 +80,7 @@ function App() {
     const groupedEntries = getSortedGroupedEntries(entries);
     return (
         <div className="container mx-auto py-8 max-w-3xl">
-            <div className="bg-slate-300 p-8 rounded-xl shadow-lg mb-8">
+            <div className="bg-slate-100/100 p-8 rounded-xl shadow-2xl mb-8">
                 <div className="flex justify-center items-center flex-col min-h-svh">
                     {/* Timer Card */}
                     <Card className="w-full max-w-xl border-0 shadow-md bg-white">
