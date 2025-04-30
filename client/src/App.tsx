@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
@@ -61,18 +60,32 @@ function App() {
 
             groups[date].push(entry);
         }
-
+ 
         return groups;
     }
 
     function getSortedGroupedEntries(entries: TimeEntry[]) {
         const grouped = groupEntriesByDate(entries);
 
-        const sorted = Object.entries(grouped).sort(([dateA], [dateB]) => {
-            const a = new Date(dateA.split(".").reverse().join("-")).getTime();
-            const b = new Date(dateB.split(".").reverse().join("-")).getTime();
-            return b - a; // neueste zuerst
-        });
+        //sort each group by startTime in descending order
+        for (const date in grouped) {
+            grouped[date].sort(
+                (a, b) =>
+                    new Date(b.startTime).getTime() -
+                    new Date(a.startTime).getTime()
+            );
+        }
+        //sort the groups by date in descending order
+        const sorted = Object.entries(grouped)
+            .sort(([dateA], [dateB]) => {
+                const a = new Date(
+                    dateA.split(".").reverse().join("-")
+                ).getTime();
+                const b = new Date(
+                    dateB.split(".").reverse().join("-")
+                ).getTime();
+                return b - a; // latest first
+            });
 
         return sorted;
     }
@@ -96,6 +109,7 @@ function App() {
                             <Input
                                 className="text-large font-semibold! py-5 border-2 border-emerald-600 focus:border-emerald-400! focus:ring-0!"
                                 placeholder="Task A"
+                                maxLength={40}
                                 disabled={timerRunning}
                                 value={taskName}
                                 onChange={(e) => setTaskName(e.target.value)}
@@ -286,8 +300,8 @@ function App() {
                                 </CardHeader>
                                 <Table>
                                     <TableHeader className="bg-emerald-600 ">
-                                        <TableRow className="hover:bg-transparent cursor-default">
-                                            <TableHead className="text-center text-white font-bold">
+                                        <TableRow className="hover:bg-transparent cursor-default w-full">
+                                            <TableHead className="text-center text-white font-bold min-w-[50%]">
                                                 Task Name
                                             </TableHead>
                                             <TableHead className="text-center text-white font-bold">
@@ -333,7 +347,7 @@ function App() {
                                                     )}
                                                 </TableCell>
                                                 <TableCell className="text-center">
-                                                    {entry.duration}
+                                                    {entry.duration} h
                                                 </TableCell>
                                             </TableRow>
                                         ))}
