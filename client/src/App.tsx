@@ -2,7 +2,8 @@ import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import { PastEntries } from "./components/PastEntries";
 import { TimerCard } from "./components/TimerCard";
-
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 interface TimeEntry {
     id: number;
     taskName: string;
@@ -143,6 +144,7 @@ function App() {
                 setTaskName("");
                 setElapsedTime(0);
                 setStartTime(null);
+                toast.success("Zeit erfolgreich gespeichert!");
             })
             .catch((error) => {
                 console.error("Fehler beim Speichern:", error);
@@ -170,6 +172,7 @@ function App() {
                     <PastEntries groupedEntries={groupedEntries} />
                 </div>
             </div>
+            <Toaster position="top-right" richColors />
         </div>
     );
 }
