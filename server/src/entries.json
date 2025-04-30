@@ -1,289 +1,65 @@
 [
   {
-    "id": 1745940525167,
-    "taskName": "d",
-    "startTime": "2025-04-23T15:28:42.458Z",
-    "endTime": "2025-04-29T15:28:45.167Z",
-    "duration": "35:01"
+    "id": 17460405629911,
+    "taskName": "Design UI",
+    "startTime": "2024-04-28T08:00:00.000Z",
+    "endTime": "2024-04-28T09:30:00.000Z",
+    "duration": "1:30"
   },
   {
-    "id": 1745940601976,
-    "taskName": "s",
-    "startTime": "2025-04-23T15:29:59.163Z",
-    "endTime": "2025-04-29T15:30:01.976Z",
-    "duration": "0:01"
+    "id": 17460405629912,
+    "taskName": "Code Timer",
+    "startTime": "2024-04-28T10:00:00.000Z",
+    "endTime": "2024-04-28T11:15:00.000Z",
+    "duration": "1:15"
   },
   {
-    "id": 1745940608043,
-    "taskName": "6",
-    "startTime": "2025-04-29T15:30:03.926Z",
-    "endTime": "2025-04-29T15:30:08.043Z",
-    "duration": "0:01"
+    "id": 17460405629913,
+    "taskName": "Fix Bugs",
+    "startTime": "2024-04-28T13:00:00.000Z",
+    "endTime": "2024-04-28T14:00:00.000Z",
+    "duration": "1:00"
   },
   {
-    "id": 1745940614599,
-    "taskName": "7u",
-    "startTime": "2025-04-29T15:30:09.836Z",
-    "endTime": "2025-04-29T15:30:14.599Z",
-    "duration": "0:01"
+    "id": 17460405629914,
+    "taskName": "Research APIs",
+    "startTime": "2024-04-27T07:30:00.000Z",
+    "endTime": "2024-04-27T08:30:00.000Z",
+    "duration": "1:00"
   },
   {
-    "id": 1745940622684,
-    "taskName": "9",
-    "startTime": "2025-04-28T15:30:16.580Z",
-    "endTime": "2025-04-29T15:30:22.684Z",
-    "duration": "0:01"
+    "id": 1746040562995,
+    "taskName": "Meeting",
+    "startTime": "2024-04-27T09:00:00.000Z",
+    "endTime": "2024-04-27T09:45:00.000Z",
+    "duration": "0:45"
   },
   {
-    "id": 1745944877285,
-    "taskName": "test",
-    "startTime": "2025-04-28T16:38:23.087Z",
-    "endTime": "2025-04-29T16:41:17.285Z",
-    "duration": "0:02"
+    "id": 1746040562996,
+    "taskName": "Test Feature",
+    "startTime": "2024-04-27T10:00:00.000Z",
+    "endTime": "2024-04-27T10:45:00.000Z",
+    "duration": "0:45"
   },
   {
-    "id": 1745945105502,
-    "taskName": "NochEInTest",
-    "startTime": "2025-04-29T16:41:29.772Z",
-    "endTime": "2025-04-29T16:45:05.502Z",
-    "duration": "0:01"
+    "id": 1746040562997,
+    "taskName": "Update Docs",
+    "startTime": "2024-04-27T11:00:00.000Z",
+    "endTime": "2024-04-27T11:30:00.000Z",
+    "duration": "0:30"
   },
   {
-    "id": 1745945135096,
-    "taskName": "sd",
-    "startTime": "2025-04-29T16:45:07.924Z",
-    "endTime": "2025-04-29T16:45:35.096Z",
-    "duration": "0:01"
+    "id": 1746040562998,
+    "taskName": "Refactor Code",
+    "startTime": "2024-04-27T12:00:00.000Z",
+    "endTime": "2024-04-27T13:00:00.000Z",
+    "duration": "1:00"
   },
   {
-    "id": 1745950560154,
-    "taskName": "Test",
-    "startTime": "2025-04-29T18:14:58.008Z",
-    "endTime": "2025-04-29T18:16:00.154Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745950567799,
-    "taskName": "greg",
-    "startTime": "2025-04-29T18:16:04.234Z",
-    "endTime": "2025-04-29T18:16:07.799Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745950572741,
-    "taskName": "hth",
-    "startTime": "2025-04-29T18:16:10.026Z",
-    "endTime": "2025-04-29T18:16:12.741Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745950583390,
-    "taskName": "hhhh",
-    "startTime": "2025-04-29T18:16:21.545Z",
-    "endTime": "2025-04-29T18:16:23.390Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745950657641,
-    "taskName": "Test",
-    "startTime": "2025-04-27T18:17:23.870Z",
-    "endTime": "2025-04-29T18:17:37.641Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745951317701,
-    "taskName": "dwdw",
-    "startTime": "2025-04-29T18:24:10.862Z",
-    "endTime": "2025-04-29T18:28:37.701Z",
-    "duration": "0:04"
-  },
-  {
-    "id": 1745952954380,
-    "taskName": "de",
-    "startTime": "2025-04-29T18:54:20.754Z",
-    "endTime": "2025-04-29T18:55:54.380Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745953008781,
-    "taskName": "Task B",
-    "startTime": "2025-04-29T18:56:44.588Z",
-    "endTime": "2025-04-29T18:56:48.781Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745955063318,
-    "taskName": "d",
-    "startTime": "2025-04-29T19:30:54.850Z",
-    "endTime": "2025-04-29T19:31:03.318Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745962226556,
-    "taskName": "Test",
-    "startTime": "2025-04-29T20:27:38.700Z",
-    "endTime": "2025-04-29T21:30:26.556Z",
-    "duration": "1:01"
-  },
-  {
-    "id": 1745962351623,
-    "taskName": "Tsdf",
-    "startTime": "2025-04-29T21:30:43.993Z",
-    "endTime": "2025-04-29T21:32:31.623Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745962422824,
-    "taskName": "test",
-    "startTime": "2025-04-29T21:33:07.167Z",
-    "endTime": "2025-04-29T21:33:42.824Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745964993044,
-    "taskName": "Task A",
-    "startTime": "2025-04-29T21:33:47.346Z",
-    "endTime": "2025-04-29T22:16:33.044Z",
-    "duration": "0:27"
-  },
-  {
-    "id": 1745965006560,
-    "taskName": "Neu",
-    "startTime": "2025-04-29T22:16:38.535Z",
-    "endTime": "2025-04-29T22:16:46.560Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745972985236,
-    "taskName": "twt",
-    "startTime": "2025-04-30T00:29:44.104Z",
-    "endTime": "2025-04-30T00:29:45.236Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745972988049,
-    "taskName": "rwe",
-    "startTime": "2025-04-30T00:29:47.329Z",
-    "endTime": "2025-04-30T00:29:48.049Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745972995203,
-    "taskName": "3",
-    "startTime": "2025-04-30T00:29:53.704Z",
-    "endTime": "2025-04-30T00:29:55.203Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745972998098,
-    "taskName": "4",
-    "startTime": "2025-04-30T00:29:56.898Z",
-    "endTime": "2025-04-30T00:29:58.098Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745973002509,
-    "taskName": "2",
-    "startTime": "2025-04-30T00:30:00.123Z",
-    "endTime": "2025-04-30T00:30:02.509Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745973005110,
-    "taskName": "3",
-    "startTime": "2025-04-30T00:30:04.856Z",
-    "endTime": "2025-04-30T00:30:05.110Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745973009918,
-    "taskName": "7",
-    "startTime": "2025-04-30T00:30:09.685Z",
-    "endTime": "2025-04-30T00:30:09.918Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745973062062,
-    "taskName": "6",
-    "startTime": "2025-04-30T00:30:13.008Z",
-    "endTime": "2025-04-30T00:31:02.062Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745974099788,
-    "taskName": "Finalize mit einem sehr langen Titel",
-    "startTime": "2025-04-30T00:47:51.492Z",
-    "endTime": "2025-04-30T00:48:19.788Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745974144371,
-    "taskName": "Noch längerer Titel",
-    "startTime": "2025-04-30T00:48:51.666Z",
-    "endTime": "2025-04-30T00:49:04.371Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1745974238897,
-    "taskName": "blabalbal mies langer titel",
-    "startTime": "2025-04-30T00:50:33.849Z",
-    "endTime": "2025-04-30T00:50:38.897Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746020959733,
-    "taskName": "ammaksmxkmaskxmaksmxkasmxkasxmskm",
-    "startTime": "2025-04-30T13:49:10.711Z",
-    "endTime": "2025-04-30T13:49:19.733Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746021285058,
-    "taskName": "Finalize mit einem sehr langen Tirtitrtr",
-    "startTime": "2025-04-30T13:54:42.253Z",
-    "endTime": "2025-04-30T13:54:45.058Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746031264799,
-    "taskName": "Tets",
-    "startTime": "2025-04-29T16:40:38.707Z",
-    "endTime": "2025-04-30T16:41:04.799Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746031309253,
-    "taskName": "Adrians Timer klappt!!",
-    "startTime": "2025-04-30T16:41:40.388Z",
-    "endTime": "2025-04-30T16:41:49.253Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746031349112,
-    "taskName": "Noch ein Test mal sehen ob das dann auch",
-    "startTime": "2025-04-30T16:42:13.277Z",
-    "endTime": "2025-04-30T16:42:29.112Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746036002202,
-    "taskName": "Dsdsad",
-    "startTime": "2025-04-30T17:59:57.808Z",
-    "endTime": "2025-04-30T18:00:02.202Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746036023848,
-    "taskName": "Dsdsad",
-    "startTime": "2025-04-30T18:00:08.630Z",
-    "endTime": "2025-04-30T18:00:23.848Z",
-    "duration": "0:01"
-  },
-  {
-    "id": 1746039225618,
-    "taskName": "Task C",
-    "startTime": "2025-04-30T18:53:40.856Z",
-    "endTime": "2025-04-30T18:53:45.618Z",
-    "duration": "0:00"
+    "id": 1746040562999,
+    "taskName": "Sprint Planning",
+    "startTime": "2024-04-26T09:00:00.000Z",
+    "endTime": "2024-04-26T10:30:00.000Z",
+    "duration": "1:30"
   }
 ]
